@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>form</title>
+</head>
+<body>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+        const firebaseConfig = {
+      apiKey: "AIzaSyAIzCN9Kj3Noy1WJB9CmUoDznO-M7XdzLk",
+      authDomain: "batch21-10165.firebaseapp.com",
+      databaseURL: "https://batch21-10165-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "batch21-10165",
+      storageBucket: "batch21-10165.appspot.com",
+      messagingSenderId: "726898197907",
+      appId: "1:726898197907:web:1de2e51993186d96179466"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        document.getElementById("userform").addEventListener("submit", function(e){
+            e.preventDefault();
+            let userId = document.getElementById("id").value;
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            set(ref(db, 'users/' + userId), {
+                username: name,
+                email: email,
+        });
+    });
+
+      </script>
+      <form method="post" id="userform">
+        <span>ID:</span><input type="text" id="id"></input> </br><br>
+        <span>Name:</span><input type="text" id="name" required></input></br><br>
+        <span>Email:</span><input type="email" id="email"></input></br> </br><br>
+        <input type="submit" value="Submit">
+
+      </form>
+    
+</body>
+</html>
